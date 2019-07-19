@@ -1,0 +1,28 @@
+%h1 Shortcuts
+%table
+  %tr
+    %th
+      Slug
+    %th
+      Target
+  - @shortcuts.each do |shortcut|
+    %tr
+      %td
+        %a{href: "/#{ shortcut.slug }"}
+          = shortcut.slug
+      %td
+        %a{href: shortcut.target}
+          = shortcut.target
+
+= form_for @shortcut do |f|
+  - if @shortcut.errors.any?
+    %div.errors
+      - @shortcut.errors.each do |attribute, message|
+        .error
+          %span.attribute
+            = attribute.to_s.titleize
+          %span.message
+            = message
+  = f.label :target
+  = f.text_field :target
+  = f.submit
